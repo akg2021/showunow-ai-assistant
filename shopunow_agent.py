@@ -9,7 +9,6 @@ import uuid
 import hashlib
 from typing import TypedDict, Literal, Annotated, Sequence, List, Dict, Optional
 from datetime import datetime
-
 from pydantic import BaseModel, Field
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langgraph.graph.message import add_messages
@@ -601,53 +600,70 @@ Be concise and informative. If the question asks about delivery time or timeline
         dept_responses = state["department_responses"]
         is_multi = state.get("is_multi_department", False)
         
-        # Sort by priority
+        # Sort by priority (for internal processing, but don't show in output)
         sorted_responses = sorted(
             dept_responses.items(),
             key=lambda x: x[1].get('priority', 999)
         )
         
-        # Build context for LLM
+        # Build context for LLM (without priority information)
         context = f"Original query: {query}\n\n"
         context += f"Department responses:\n\n"
         
         for dept, data in sorted_responses:
             status = "✓" if data.get('success') else "✗"
-            context += f"[{status}] {dept} (Priority {data.get('priority')})\n"
+            context += f"[{status}] {dept}\n"
             context += f"Question: {data['question']}\n"
             context += f"Answer: {data['response']}\n\n"
         
         # Different compilation strategy based on single vs multi
         if is_multi:
-            prompt = f"""You are compiling responses from multiple ShopUNow departments.
+            prompt = f"""You are a friendly AI assistant for ShopUNow helping a customer via chat.
 
 {context}
 
-Task: Create ONE cohesive, well-structured response that addresses ALL parts of the original query.
+Task: Create ONE natural, conversational chat response that addresses ALL parts of the user's query.
+
+IMPORTANT FORMATTING RULES:
+- Write in a friendly, conversational chat style (NOT email format)
+- Do NOT use email greetings like "Dear [User's Name]" or "Subject:"
+- Do NOT include "Best regards" or email signatures
+- Do NOT mention priorities or priority numbers
+- Start directly with the answer, as if continuing a conversation
+- Use natural transitions between topics
+- Keep it concise and helpful
+- Use bullet points or short paragraphs if needed, but keep it chat-like
 
 Guidelines:
-1. Organize information logically by priority
-2. Use clear sections or formatting if helpful
-3. Make it flow naturally - don't just list separate answers
+1. Organize information logically (by importance, not by "priority")
+2. Use natural transitions - "Also," "For your other question," etc.
+3. Make it flow like a conversation - don't just list separate answers
 4. If any department couldn't answer, acknowledge gracefully
-5. The user should feel they got ONE complete answer, not separate pieces
+5. The user should feel they got ONE complete answer in a chat format
 
-Provide a unified, comprehensive response.
+Provide a friendly, conversational chat response.
 """
         else:
-            prompt = f"""You are presenting a response from ShopUNow.
+            prompt = f"""You are a friendly AI assistant for ShopUNow helping a customer via chat.
 
 {context}
 
-Task: Present this answer in a clear, helpful, professional manner.
+Task: Present this answer in a clear, helpful, conversational chat style.
+
+IMPORTANT FORMATTING RULES:
+- Write in a friendly, conversational chat style (NOT email format)
+- Do NOT use email greetings like "Dear [User's Name]" or "Subject:"
+- Do NOT include "Best regards" or email signatures
+- Start directly with the answer, as if continuing a conversation
+- Keep it concise and helpful
 
 Guidelines:
 1. Keep the core information from the department response
-2. Make it conversational and friendly
+2. Make it conversational and friendly - like you're chatting
 3. If there was no information, acknowledge politely
 4. You can slightly rephrase for better flow, but keep the facts accurate
 
-Provide the final response.
+Provide a friendly, conversational chat response.
 """
         
         compiled = self.llm.invoke(prompt).content
@@ -666,20 +682,15 @@ Provide the final response.
         ref_number = abs(hash(query)) % 10000
         
         if "negative" in reason.lower() or "sentiment" in reason.lower():
-            message = f"""We sincerely apologize. Your query has been escalated.
+            message = f"""I'm really sorry to hear about your issue. I've escalated this to a specialist who will reach out to you shortly.
 
-A specialist will contact you shortly.
-
-Reference: ESC-{ref_number:04d}
-
-Thank you for your patience."""
+Your reference number is ESC-{ref_number:04d}. Thanks for your patience!"""
         else:
-            message = f"""Thank you for your query. We're connecting you with a specialist.
+            message = f"""Thanks for reaching out! I'm connecting you with a specialist who can help with this.
 
-Reference: ESC-{ref_number:04d}
-Response time: Within 24 hours
+Your reference number is ESC-{ref_number:04d}. They'll respond within 24 hours.
 
-For urgent matters: 1-800-SHOPUNOW"""
+If it's urgent, you can also call us at 1-800-SHOPUNOW."""
         
         return {
             "messages": [AIMessage(content=message)],
