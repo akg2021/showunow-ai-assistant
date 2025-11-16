@@ -1,6 +1,6 @@
 """
-ShopUNow AI Agent - Cloud-Ready Version
-Optimized for Streamlit Cloud Deployment
+ShopUNow AI Agent - Capstone Project
+
 """
 
 import os
@@ -246,14 +246,25 @@ class VectorDBManager:
     def create_database(self, knowledge_base):
         """Create vector database with telemetry disabled."""
         
-        # Process documents
-        processed_docs = [
-            Document(
-                page_content=doc['text'],
-                metadata=doc['metadata']
-            )
-            for doc in knowledge_base
-        ]
+        # Validate knowledge base
+        if not knowledge_base:
+            raise ValueError("Knowledge base is empty. Cannot create vector database.")
+        
+        # Process documents and filter out empty ones
+        processed_docs = []
+        for doc in knowledge_base:
+            text = doc.get('text', '').strip()
+            if text:  # Only include documents with non-empty text
+                processed_docs.append(
+                    Document(
+                        page_content=text,
+                        metadata=doc.get('metadata', {})
+                    )
+                )
+        
+        # Validate we have documents after filtering
+        if not processed_docs:
+            raise ValueError("No valid documents found in knowledge base. All documents have empty text content.")
         
         # Create embeddings
         api_key = get_secret("OPENAI_API_KEY", "")
@@ -267,14 +278,50 @@ class VectorDBManager:
             allow_reset=True
         )
         
+        # Check if ChromaDB already exists and reset if needed
+        import shutil
+        chroma_path = Config.CHROMA_DIR
+        if os.path.exists(chroma_path):
+            try:
+                # Try to load existing database first
+                try:
+                    existing_db = Chroma(
+                        collection_name='shopunow_kb',
+                        embedding=embeddings,
+                        persist_directory=chroma_path,
+                        client_settings=client_settings
+                    )
+                    # Check if collection has documents
+                    collection = existing_db._collection
+                    if collection and collection.count() > 0:
+                        # Reuse existing database
+                        self.db = existing_db
+                        self.retriever = self.db.as_retriever(
+                            search_type="similarity_score_threshold",
+                            search_kwargs={"k": 3, "score_threshold": 0.2}
+                        )
+                        return self.db, self.retriever
+                except Exception:
+                    # If loading fails, reset the database
+                    pass
+                
+                # Reset database if it exists but is empty or corrupted
+                shutil.rmtree(chroma_path)
+            except Exception as e:
+                # If reset fails, try to continue anyway
+                pass
+        
         # Create database
-        self.db = Chroma.from_documents(
-            documents=processed_docs,
-            collection_name='shopunow_kb',
-            embedding=embeddings,
-            persist_directory=Config.CHROMA_DIR,
-            client_settings=client_settings
-        )
+        try:
+            self.db = Chroma.from_documents(
+                documents=processed_docs,
+                collection_name='shopunow_kb',
+                embedding=embeddings,
+                persist_directory=chroma_path,
+                client_settings=client_settings
+            )
+        except Exception as e:
+            raise ValueError(f"Failed to create vector database: {str(e)}. Ensure documents have valid content.")
         
         # Create retriever
         self.retriever = self.db.as_retriever(
@@ -345,7 +392,7 @@ class AgentNodes:
     def __init__(self, llm, retriever, db=None):
         self.llm = llm
         self.retriever = retriever
-        self.db = db  # Store db reference for creating new retrievers
+        self.db = db 
     
     def check_sentiment(self, state: AgentState) -> AgentState:
         """Check query sentiment for escalation."""
@@ -406,7 +453,6 @@ Return: is_multi_department (true if >1 sub-query), sub_queries list, explanatio
         
         result = self.llm.with_structured_output(QueryDecomposition).invoke(prompt)
         
-        # Force at least one sub-query if none provided
         if not result.sub_queries:
             result.sub_queries = [
                 SubQuery(question=query, department='Products', priority=1)
@@ -467,44 +513,35 @@ Return: is_multi_department (true if >1 sub-query), sub_queries list, explanatio
                 continue
             
             try:
-                # Use the db to create a new retriever with department filter and lower threshold
-                # First try with filter
                 db_source = self.db
                 if not db_source:
-                    # Fallback: try to get vectorstore from retriever attributes
                     db_source = getattr(self.retriever, 'vectorstore', None) or getattr(self.retriever, '_vectorstore', None)
                 
                 if db_source:
-                    # Try with department filter first
                     filtered_retriever = db_source.as_retriever(
                         search_type="similarity_score_threshold",
                         search_kwargs={
-                            "k": 5,  # Increase k to get more results
-                            "score_threshold": 0.1,  # Lower threshold for better recall
+                            "k": 5,
+                            "score_threshold": 0.1, 
                             "filter": {"department": dept_filter}
                         }
                     )
                     docs = filtered_retriever.invoke(question)
                     
-                    # If no docs found with filter, try without filter but still prioritize department matches
                     if not docs or len(docs) == 0:
-                        # Try with similarity search (no threshold) to get more results
                         fallback_retriever = db_source.as_retriever(
                             search_type="similarity",
                             search_kwargs={"k": 5}
                         )
                         all_docs = fallback_retriever.invoke(question)
-                        # Filter manually to prioritize department matches
+
                         docs = [doc for doc in all_docs if doc.metadata.get('department') == dept_filter]
-                        # If still no matches, use top results anyway (they might still be relevant)
+ 
                         if not docs and all_docs:
                             docs = all_docs[:3]
                 else:
-                    # Fallback: use original retriever but modify search_kwargs temporarily
-                    # Save original search_kwargs
                     original_kwargs = dict(self.retriever.search_kwargs) if hasattr(self.retriever, 'search_kwargs') else {}
                     
-                    # Try with filter
                     try:
                         self.retriever.search_kwargs = {
                             "k": 5,
@@ -515,19 +552,17 @@ Return: is_multi_department (true if >1 sub-query), sub_queries list, explanatio
                     except:
                         docs = []
                     
-                    # If no docs, try without filter
                     if not docs or len(docs) == 0:
                         try:
                             self.retriever.search_kwargs = {"k": 5, "score_threshold": 0.05}
                             all_docs = self.retriever.invoke(question)
-                            # Filter manually
+
                             docs = [doc for doc in all_docs if doc.metadata.get('department') == dept_filter]
                             if not docs and all_docs:
                                 docs = all_docs[:3]
                         except:
                             docs = []
                     
-                    # Restore original kwargs
                     if original_kwargs:
                         self.retriever.search_kwargs = original_kwargs
                 
@@ -543,7 +578,6 @@ Return: is_multi_department (true if >1 sub-query), sub_queries list, explanatio
                     }
                     continue
                 
-                # Generate response
                 prompt = ChatPromptTemplate.from_template(
                     """You are answering for ShopUNow's {department}.
 
@@ -600,13 +634,12 @@ Be concise and informative. If the question asks about delivery time or timeline
         dept_responses = state["department_responses"]
         is_multi = state.get("is_multi_department", False)
         
-        # Sort by priority (for internal processing, but don't show in output)
+
         sorted_responses = sorted(
             dept_responses.items(),
             key=lambda x: x[1].get('priority', 999)
         )
         
-        # Build context for LLM (without priority information)
         context = f"Original query: {query}\n\n"
         context += f"Department responses:\n\n"
         
@@ -717,7 +750,6 @@ class ShopUNowAgent:
         if self._initialized:
             return
         
-        # Get API key (from Streamlit secrets or environment)
         api_key = get_secret("OPENAI_API_KEY", "")
         if not api_key:
             raise ValueError(
@@ -862,7 +894,7 @@ class ShopUNowAgent:
 
 
 # ============================================================================
-# Module-level instance (singleton pattern)
+# Module-level instance
 # ============================================================================
 
 _agent_instance = None
