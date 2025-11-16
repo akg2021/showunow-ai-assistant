@@ -16,7 +16,7 @@ from shopunow_agent import get_agent
 
 st.set_page_config(
     page_title="ShopUNow AI Assistant",
-    page_icon="🛒",
+    page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -122,7 +122,7 @@ if 'escalation_count' not in st.session_state:
 def initialize_agent():
     """Initialize agent on first use."""
     if not st.session_state.initialized:
-        with st.spinner("🔧 Initializing AI Assistant..."):
+        with st.spinner("Initializing AI Assistant..."):
             try:
                 st.session_state.agent = get_agent()
                 st.session_state.agent.initialize()
@@ -130,7 +130,7 @@ def initialize_agent():
                 st.session_state.session_id = st.session_state.agent.new_chat()
                 return True
             except Exception as e:
-                st.error(f"❌ Initialization failed: {str(e)}")
+                st.error(f"Initialization failed: {str(e)}")
                 return False
     return True
 
@@ -138,7 +138,7 @@ def initialize_agent():
 # Header
 # ============================================================================
 
-st.markdown('<h1 class="main-header">🛒 ShopUNow AI Assistant</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-header">ShopUNow AI Assistant</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Your intelligent shopping companion - Ask me anything!</p>', unsafe_allow_html=True)
 st.markdown("---")
 
@@ -147,24 +147,24 @@ st.markdown("---")
 # ============================================================================
 
 with st.sidebar:
-    st.header("💬 Chat Controls")
+    st.header("Chat Controls")
     
     # New Chat Button
-    if st.button("🆕 New Chat", use_container_width=True):
+    if st.button("New Chat", use_container_width=True):
         if st.session_state.initialized:
             st.session_state.chat_history = []
             st.session_state.session_id = st.session_state.agent.new_chat()
             st.session_state.message_count = 0
             st.session_state.escalation_count = 0
-            st.success("✅ New chat started!")
+            st.success("New chat started!")
             st.rerun()
         else:
-            st.warning("⚠️ Please send a message to initialize the agent first.")
+            st.warning("Please send a message to initialize the agent first.")
     
     st.markdown("---")
     
     # Session Statistics
-    st.subheader("📊 Session Stats")
+    st.subheader("Session Stats")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -194,7 +194,7 @@ with st.sidebar:
     st.markdown("---")
     
     # Download Chat History
-    st.subheader("📥 Download Chat")
+    st.subheader("Download Chat")
     
     user_email = st.text_input(
         "Email (optional):",
@@ -202,7 +202,7 @@ with st.sidebar:
         help="Provide your email to receive a copy"
     )
     
-    if st.button("💾 Download History", use_container_width=True):
+    if st.button("Download History", use_container_width=True):
         if st.session_state.chat_history:
             # Generate chat history content
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -238,21 +238,21 @@ with st.sidebar:
             
             # Offer download
             st.download_button(
-                label="📄 Download as TXT",
+                label="Download as TXT",
                 data=chat_content,
                 file_name=f"shopunow_chat_{timestamp}.txt",
                 mime="text/plain",
                 use_container_width=True
             )
             
-            st.success("✅ Ready to download!")
+            st.success("Ready to download!")
         else:
-            st.warning("⚠️ No chat history to download")
+            st.warning("No chat history to download")
     
     st.markdown("---")
     
     # Help Section
-    with st.expander("ℹ️ Help & Info"):
+    with st.expander("Help & Info"):
         st.markdown("""
         **How to use:**
         1. Type your question in the chat box
@@ -260,12 +260,12 @@ with st.sidebar:
         3. Get instant AI-powered responses
         
         **I can help with:**
-        - 🛍️ Product information
-        - 📦 Shipping & delivery
-        - 💳 Billing & payments
-        - 👥 HR & employee queries
-        - 💻 IT support
-        - 🏢 Facilities & admin
+        - Product information
+        - Shipping & delivery
+        - Billing & payments
+        - HR & employee queries
+        - IT support
+        - Facilities & admin
         
         **Tips:**
         - Be specific in your questions
@@ -289,15 +289,15 @@ with chat_container:
         # Welcome message
         st.markdown("""
         <div class="info-card">
-            <h3>👋 Welcome to ShopUNow AI Assistant!</h3>
+            <h3>Welcome to ShopUNow AI Assistant!</h3>
             <p>I'm here to help you with:</p>
             <ul>
-                <li>🛍️ Product information and availability</li>
-                <li>📦 Shipping and delivery tracking</li>
-                <li>💳 Billing and payment questions</li>
-                <li>👥 HR and employee services</li>
-                <li>💻 IT support and technical help</li>
-                <li>🏢 Facilities and administrative queries</li>
+                <li>Product information and availability</li>
+                <li>Shipping and delivery tracking</li>
+                <li>Billing and payment questions</li>
+                <li>HR and employee services</li>
+                <li>IT support and technical help</li>
+                <li>Facilities and administrative queries</li>
             </ul>
             <p><b>Ask me anything to get started!</b></p>
         </div>
@@ -335,7 +335,7 @@ if user_input:
     st.session_state.message_count += 1
     
     # Get response from agent
-    with st.spinner("🤔 Thinking..."):
+    with st.spinner("Thinking..."):
         try:
             result = st.session_state.agent.ask(
                 user_input, 
@@ -356,7 +356,7 @@ if user_input:
             st.session_state.message_count += 1
             
         except Exception as e:
-            st.error(f"❌ Error: {str(e)}")
+            st.error(f"Error: {str(e)}")
             st.session_state.chat_history.append({
                 'role': 'assistant',
                 'content': "I apologize, but I encountered an error processing your request. Please try again."
@@ -369,12 +369,12 @@ if user_input:
 # ============================================================================
 
 st.markdown("---")
-st.markdown("### 🚀 Quick Actions")
+st.markdown("### Quick Actions")
 
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    if st.button("🛍️ Browse Products", use_container_width=True):
+    if st.button("Browse Products", use_container_width=True):
         if not initialize_agent():
             st.stop()
         st.session_state.chat_history.append({
@@ -384,7 +384,7 @@ with col1:
         st.rerun()
 
 with col2:
-    if st.button("📦 Track Order", use_container_width=True):
+    if st.button("Track Order", use_container_width=True):
         if not initialize_agent():
             st.stop()
         st.session_state.chat_history.append({
@@ -394,7 +394,7 @@ with col2:
         st.rerun()
 
 with col3:
-    if st.button("💳 Billing Help", use_container_width=True):
+    if st.button("Billing Help", use_container_width=True):
         if not initialize_agent():
             st.stop()
         st.session_state.chat_history.append({
@@ -404,7 +404,7 @@ with col3:
         st.rerun()
 
 with col4:
-    if st.button("🆘 Get Support", use_container_width=True):
+    if st.button("Get Support", use_container_width=True):
         if not initialize_agent():
             st.stop()
         st.session_state.chat_history.append({

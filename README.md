@@ -1,8 +1,38 @@
 # ShopUNow AI Assistant - Cloud Deployment Guide
 
+# Build a Customer Support Router Agentic RAG System
+
+In this project, we will leverage the power of AI Agents and RAG Systems to build an intelligent Router Agentic RAG System to handle customer support queries using a custom knowledgebase.
+
+![](https://i.imgur.com/bLCdxCI.png)
+
+### Intelligent Router Agentic RAG System
+
+This project focuses on building an **Intelligent Router Agentic RAG System** that combines intelligent query analysis, sentiment detection, and dynamic routing with Retrieval-Augmented Generation (RAG) to handle diverse user inquiries efficiently. The workflow includes the following components:
+
+1. **Query Categorization and Sentiment Analysis**:
+   - The system uses **OpenAI GPT-4o** to analyze the user's query and determine:
+     - **Query Category**: Identifies the type of problem, such as billing, technical issues, or general queries.
+     - **User Sentiment**: Evaluates the user's sentiment (positive, neutral, or negative) to determine if escalation is needed.
+
+2. **Intelligent Routing**:
+   - Based on the **query_category** and **query_sentiment**, the system routes the query to the appropriate handling node:
+     - **Escalate to Human**: If the sentiment is negative, the query is escalated to a human for resolution.
+     - **Generate Billing Response**: Queries related to billing are routed to generate an appropriate response.
+     - **Generate Technical Response**: Technical queries are routed for a specialized technical response.
+     - **Generate General Response**: General queries are handled with context-aware responses.
+
+3. **Knowledge Base Integration (RAG)**:
+   - The system integrates with a **Knowledge Base (Vector Database)** to augment responses with relevant and accurate information.
+   - Retrieval-Augmented Generation (RAG) ensures that responses are grounded in the latest and most reliable data.
+
+4. **Escalation Mechanism**:
+   - Negative sentiment triggers an **escalation to a human**, ensuring the user receives empathetic and personalized support for critical issues.
+
+
 A multi-department AI chatbot with conversation memory, sentiment analysis, and intelligent routing.
 
-## 🚀 Features
+## Features
 
 - **Multi-Department Routing**: Automatically routes queries to HR, IT, Facilities, Products, Billing, or Shipping
 - **Conversation Memory**: Maintains context across multiple exchanges
@@ -11,14 +41,14 @@ A multi-department AI chatbot with conversation memory, sentiment analysis, and 
 - **Download Chat History**: Users can export their conversation
 - **Responsive UI**: Clean, modern Streamlit interface
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Python 3.9+
 - OpenAI API key
 - GitHub account
 - Streamlit Cloud account (free tier available)
 
-## 🛠️ Local Setup
+## Local Setup
 
 ### 1. Clone the Repository
 
@@ -61,7 +91,7 @@ streamlit run streamlit_app.py
 
 Visit `http://localhost:8501` in your browser.
 
-## ☁️ Deploy to Streamlit Cloud
+## Deploy to Streamlit Cloud
 
 ### Step 1: Prepare GitHub Repository
 
@@ -106,7 +136,7 @@ SUPPORT_EMAIL = "support@shopunow.com"
 
 Click **Deploy!** and wait for the app to build (2-5 minutes).
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 shopunow-ai-assistant/
@@ -120,7 +150,7 @@ shopunow-ai-assistant/
 └── .gitignore                # Git ignore rules
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Agent Settings
 
@@ -137,7 +167,7 @@ class Config:
 
 To add/modify departments, edit the `generate_knowledge_base()` function in `shopunow_agent.py`.
 
-## 📊 Usage
+## Usage
 
 ### Basic Chat
 
@@ -160,14 +190,14 @@ The agent automatically detects and routes multi-department queries:
 3. Click **Download History**
 4. Save the TXT file
 
-## 🔒 Security Notes
+## Security Notes
 
 - Never commit `.env` or `secrets.toml` files
 - Use environment variables for all sensitive data
 - Streamlit Cloud secrets are encrypted at rest
 - Add `.env` and `secrets.toml` to `.gitignore`
 
-## 📝 .gitignore
+## .gitignore
 
 Create a `.gitignore` file:
 
@@ -198,7 +228,7 @@ shopunow_kb.json
 *.swo
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### "OPENAI_API_KEY not set"
 
@@ -222,7 +252,7 @@ Check Streamlit Cloud logs:
 
 The agent initializes on first use (10-30 seconds). Subsequent responses are faster.
 
-## 🔄 Updates and Maintenance
+## Updates and Maintenance
 
 ### Update Code
 
@@ -244,7 +274,7 @@ pip install -r requirements.txt --upgrade
 
 Commit and push changes.
 
-## 📚 API Reference
+## API Reference
 
 ### Agent Methods
 
@@ -265,24 +295,24 @@ session_id = agent.new_chat()
 history = agent.get_chat_history(session_id)
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Submit a pull request
 
-## 📄 License
+## License
 
 MIT License - feel free to use for your projects!
 
-## 💬 Support
+## Support
 
 - **Issues**: Open a GitHub issue
 - **Email**: support@shopunow.com
 - **Phone**: 1-800-SHOPUNOW
 
-## 🎯 Roadmap
+## Roadmap
 
 - [ ] Add user authentication
 - [ ] Implement real email notifications
@@ -291,14 +321,14 @@ MIT License - feel free to use for your projects!
 - [ ] Multi-language support
 - [ ] Voice input/output
 
-## 📈 Performance Tips
+## Performance Tips
 
 1. **First Load**: Agent initializes once per session (~30 seconds)
 2. **Caching**: Knowledge base is cached after first load
 3. **Scaling**: Streamlit Cloud auto-scales based on usage
 4. **Optimization**: Use GPT-4o-mini for faster responses (lower cost)
 
-## 🔗 Links
+## Links
 
 - [Streamlit Documentation](https://docs.streamlit.io)
 - [LangChain Documentation](https://python.langchain.com)
@@ -306,4 +336,4 @@ MIT License - feel free to use for your projects!
 
 ---
 
-**Built with ❤️ by ShopUNow Team**
+**Built with love by ShopUNow Team**
