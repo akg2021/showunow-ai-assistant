@@ -20,9 +20,36 @@ from langchain_chroma import Chroma
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 import chromadb
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Suppress ChromaDB telemetry
 os.environ['ANONYMIZED_TELEMETRY'] = 'False'
+
+# ============================================================================
+# Configuration Helper
+# ============================================================================
+
+def get_secret(key: str, default: str = "") -> str:
+    """Get secret from Streamlit secrets or environment variable."""
+    # Try Streamlit secrets first (for cloud deployment)
+    try:
+        import streamlit as st
+        if hasattr(st, 'secrets'):
+            try:
+                if key in st.secrets:
+                    return st.secrets[key]
+            except (AttributeError, KeyError, TypeError):
+                # Secrets file might not exist or key not found - that's okay
+                pass
+    except (ImportError, RuntimeError):
+        # Streamlit not available or not in Streamlit context - that's okay
+        pass
+    
+    # Fallback to environment variable (for local development with .env file)
+    return os.getenv(key, default)
 
 # ============================================================================
 # Configuration
@@ -31,13 +58,13 @@ os.environ['ANONYMIZED_TELEMETRY'] = 'False'
 class Config:
     """Application configuration."""
     
-    # API Keys (loaded from environment or Streamlit secrets)
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+    # API Keys (loaded from Streamlit secrets or environment)
+    OPENAI_API_KEY = get_secret("OPENAI_API_KEY", "")
     
     # Email settings (optional)
-    ESCALATION_EMAIL = os.getenv("ESCALATION_EMAIL", "noreply@shopunow.com")
-    ESCALATION_EMAIL_PASSWORD = os.getenv("ESCALATION_EMAIL_PASSWORD", "")
-    SUPPORT_EMAIL = os.getenv("SUPPORT_EMAIL", "support@shopunow.com")
+    ESCALATION_EMAIL = get_secret("ESCALATION_EMAIL", "noreply@shopunow.com")
+    ESCALATION_EMAIL_PASSWORD = get_secret("ESCALATION_EMAIL_PASSWORD", "")
+    SUPPORT_EMAIL = get_secret("SUPPORT_EMAIL", "support@shopunow.com")
     
     # Paths
     KB_FILE = "shopunow_kb.json"
@@ -230,7 +257,10 @@ class VectorDBManager:
         ]
         
         # Create embeddings
-        embeddings = OpenAIEmbeddings(model=Config.EMBEDDING_MODEL)
+        api_key = get_secret("OPENAI_API_KEY", "")
+        if not api_key:
+            raise ValueError("OPENAI_API_KEY not found for embeddings.")
+        embeddings = OpenAIEmbeddings(model=Config.EMBEDDING_MODEL, openai_api_key=api_key)
         
         # Configure ChromaDB
         client_settings = chromadb.config.Settings(
@@ -313,9 +343,10 @@ class SessionManager:
 class AgentNodes:
     """Agent workflow nodes."""
     
-    def __init__(self, llm, retriever):
+    def __init__(self, llm, retriever, db=None):
         self.llm = llm
         self.retriever = retriever
+        self.db = db  # Store db reference for creating new retrievers
     
     def check_sentiment(self, state: AgentState) -> AgentState:
         """Check query sentiment for escalation."""
@@ -437,10 +468,71 @@ Return: is_multi_department (true if >1 sub-query), sub_queries list, explanatio
                 continue
             
             try:
-                # Retrieve from knowledge base
-                self.retriever.search_kwargs["filter"] = {'department': dept_filter}
-                docs = self.retriever.invoke(question)
-                content = "\n\n".join(doc.page_content for doc in docs)
+                # Use the db to create a new retriever with department filter and lower threshold
+                # First try with filter
+                db_source = self.db
+                if not db_source:
+                    # Fallback: try to get vectorstore from retriever attributes
+                    db_source = getattr(self.retriever, 'vectorstore', None) or getattr(self.retriever, '_vectorstore', None)
+                
+                if db_source:
+                    # Try with department filter first
+                    filtered_retriever = db_source.as_retriever(
+                        search_type="similarity_score_threshold",
+                        search_kwargs={
+                            "k": 5,  # Increase k to get more results
+                            "score_threshold": 0.1,  # Lower threshold for better recall
+                            "filter": {"department": dept_filter}
+                        }
+                    )
+                    docs = filtered_retriever.invoke(question)
+                    
+                    # If no docs found with filter, try without filter but still prioritize department matches
+                    if not docs or len(docs) == 0:
+                        # Try with similarity search (no threshold) to get more results
+                        fallback_retriever = db_source.as_retriever(
+                            search_type="similarity",
+                            search_kwargs={"k": 5}
+                        )
+                        all_docs = fallback_retriever.invoke(question)
+                        # Filter manually to prioritize department matches
+                        docs = [doc for doc in all_docs if doc.metadata.get('department') == dept_filter]
+                        # If still no matches, use top results anyway (they might still be relevant)
+                        if not docs and all_docs:
+                            docs = all_docs[:3]
+                else:
+                    # Fallback: use original retriever but modify search_kwargs temporarily
+                    # Save original search_kwargs
+                    original_kwargs = dict(self.retriever.search_kwargs) if hasattr(self.retriever, 'search_kwargs') else {}
+                    
+                    # Try with filter
+                    try:
+                        self.retriever.search_kwargs = {
+                            "k": 5,
+                            "score_threshold": 0.1,
+                            "filter": {"department": dept_filter}
+                        }
+                        docs = self.retriever.invoke(question)
+                    except:
+                        docs = []
+                    
+                    # If no docs, try without filter
+                    if not docs or len(docs) == 0:
+                        try:
+                            self.retriever.search_kwargs = {"k": 5, "score_threshold": 0.05}
+                            all_docs = self.retriever.invoke(question)
+                            # Filter manually
+                            docs = [doc for doc in all_docs if doc.metadata.get('department') == dept_filter]
+                            if not docs and all_docs:
+                                docs = all_docs[:3]
+                        except:
+                            docs = []
+                    
+                    # Restore original kwargs
+                    if original_kwargs:
+                        self.retriever.search_kwargs = original_kwargs
+                
+                content = "\n\n".join(doc.page_content for doc in docs) if docs else ""
                 
                 if not content or len(docs) == 0:
                     failed_count += 1
@@ -462,7 +554,7 @@ Knowledge Base Information:
 {content}
 
 Provide a clear, focused answer to this specific question.
-Be concise and informative.
+Be concise and informative. If the question asks about delivery time or timeline, provide the specific number of days mentioned in the knowledge base.
 """
                 )
                 
@@ -614,11 +706,18 @@ class ShopUNowAgent:
         if self._initialized:
             return
         
+        # Get API key (from Streamlit secrets or environment)
+        api_key = get_secret("OPENAI_API_KEY", "")
+        if not api_key:
+            raise ValueError(
+                "OPENAI_API_KEY not found. Please set it in Streamlit secrets or as an environment variable."
+            )
+        
         # Initialize LLM
         self.llm = ChatOpenAI(
             model=Config.LLM_MODEL,
             temperature=Config.LLM_TEMPERATURE,
-            api_key=Config.OPENAI_API_KEY
+            api_key=api_key
         )
         
         # Load knowledge base
@@ -627,10 +726,10 @@ class ShopUNowAgent:
         
         # Create vector database
         db_manager = VectorDBManager()
-        _, retriever = db_manager.create_database(knowledge_base)
+        db, retriever = db_manager.create_database(knowledge_base)
         
         # Build agent graph
-        nodes = AgentNodes(self.llm, retriever)
+        nodes = AgentNodes(self.llm, retriever, db)
         graph = self._build_graph(nodes)
         
         # Compile with memory
