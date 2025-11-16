@@ -275,7 +275,7 @@ with st.sidebar:
     
     st.markdown("---")
     st.caption("Powered by ShopUNow AI")
-    st.caption("© 2024 ShopUNow Inc.")
+    st.caption("© 2025 ShopUNow Inc.")
 
 # ============================================================================
 # Main Chat Area
@@ -373,45 +373,64 @@ st.markdown("### Quick Actions")
 
 col1, col2, col3, col4 = st.columns(4)
 
+def handle_quick_action(query: str):
+    """Handle quick action button click - process query through agent."""
+    # Initialize agent if needed
+    if not initialize_agent():
+        st.stop()
+    
+    # Add user message to history
+    st.session_state.chat_history.append({
+        'role': 'user',
+        'content': query
+    })
+    st.session_state.message_count += 1
+    
+    # Get response from agent
+    with st.spinner("Thinking..."):
+        try:
+            result = st.session_state.agent.ask(
+                query, 
+                session_id=st.session_state.session_id
+            )
+            
+            response = result.get('response', 'I apologize, but I encountered an error.')
+            
+            # Track escalations
+            if result.get('escalated', False):
+                st.session_state.escalation_count += 1
+            
+            # Add assistant response
+            st.session_state.chat_history.append({
+                'role': 'assistant',
+                'content': response
+            })
+            st.session_state.message_count += 1
+            
+        except Exception as e:
+            st.error(f"Error: {str(e)}")
+            st.session_state.chat_history.append({
+                'role': 'assistant',
+                'content': "I apologize, but I encountered an error processing your request. Please try again."
+            })
+    
+    st.rerun()
+
 with col1:
     if st.button("Browse Products", use_container_width=True):
-        if not initialize_agent():
-            st.stop()
-        st.session_state.chat_history.append({
-            'role': 'user', 
-            'content': 'What products do you have?'
-        })
-        st.rerun()
+        handle_quick_action('What products do you have?')
 
 with col2:
     if st.button("Track Order", use_container_width=True):
-        if not initialize_agent():
-            st.stop()
-        st.session_state.chat_history.append({
-            'role': 'user', 
-            'content': 'How can I track my order?'
-        })
-        st.rerun()
+        handle_quick_action('How can I track my order?')
 
 with col3:
     if st.button("Billing Help", use_container_width=True):
-        if not initialize_agent():
-            st.stop()
-        st.session_state.chat_history.append({
-            'role': 'user', 
-            'content': 'I have a billing question'
-        })
-        st.rerun()
+        handle_quick_action('I have a billing question')
 
 with col4:
     if st.button("Get Support", use_container_width=True):
-        if not initialize_agent():
-            st.stop()
-        st.session_state.chat_history.append({
-            'role': 'user', 
-            'content': 'I need help with an issue'
-        })
-        st.rerun()
+        handle_quick_action('I need help with an issue')
 
 # ============================================================================
 # Footer
