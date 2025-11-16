@@ -24,8 +24,11 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-# Suppress ChromaDB telemetry
+# Suppress ChromaDB telemetry and ensure local mode
 os.environ['ANONYMIZED_TELEMETRY'] = 'False'
+# Prevent ChromaDB from trying to connect to a server
+os.environ['CHROMA_SERVER_HOST'] = ''
+os.environ['CHROMA_SERVER_HTTP_PORT'] = ''
 
 # ============================================================================
 # Configuration Helper
@@ -339,55 +342,79 @@ class VectorDBManager:
         embeddings = OpenAIEmbeddings(model=Config.EMBEDDING_MODEL, openai_api_key=api_key)
         
         # Configure ChromaDB
+
+
+        import shutil
+        
+        # Use absolute path for chroma directory
+        chroma_path = Config.CHROMA_DIR
+        if not os.path.isabs(chroma_path):
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            chroma_path = os.path.join(script_dir, chroma_path)
+        
+        # Configure ChromaDB settings
         client_settings = chromadb.config.Settings(
             anonymized_telemetry=False,
-            allow_reset=True
+            allow_reset=True,
+            is_persistent=True
         )
         
-        # Check if ChromaDB already exists and reset if needed
-        import shutil
-        chroma_path = Config.CHROMA_DIR
+        # Try to load existing database first
         if os.path.exists(chroma_path):
             try:
-                # Try to load existing database first
-                try:
-                    existing_db = Chroma(
-                        collection_name='shopunow_kb',
-                        embedding=embeddings,
-                        persist_directory=chroma_path,
-                        client_settings=client_settings
+                # Create PersistentClient explicitly to avoid server connection
+                persistent_client = chromadb.PersistentClient(
+                    path=chroma_path,
+                    settings=client_settings
+                )
+                existing_db = Chroma(
+                    collection_name='shopunow_kb',
+                    embedding=embeddings,
+                    client=persistent_client
+                )
+                # Check if collection has documents
+                collection = existing_db._collection
+                if collection and collection.count() > 0:
+                    # Reuse existing database
+                    self.db = existing_db
+                    self.retriever = self.db.as_retriever(
+                        search_type="similarity_score_threshold",
+                        search_kwargs={"k": 3, "score_threshold": 0.2}
                     )
-                    # Check if collection has documents
-                    collection = existing_db._collection
-                    if collection and collection.count() > 0:
-                        # Reuse existing database
-                        self.db = existing_db
-                        self.retriever = self.db.as_retriever(
-                            search_type="similarity_score_threshold",
-                            search_kwargs={"k": 3, "score_threshold": 0.2}
-                        )
-                        return self.db, self.retriever
-                except Exception:
-                    # If loading fails, reset the database
+                    print(f"Loaded existing ChromaDB with {collection.count()} documents")
+                    return self.db, self.retriever
+            except Exception as load_error:
+                print(f"Could not load existing database: {load_error}. Recreating...")
+                # If loading fails, reset the database
+                try:
+                    shutil.rmtree(chroma_path)
+                except:
                     pass
-                
-                # Reset database if it exists but is empty or corrupted
-                shutil.rmtree(chroma_path)
-            except Exception as e:
-                # If reset fails, try to continue anyway
-                pass
         
-        # Create database
+        # Create new database with explicit PersistentClient
         try:
+            # Ensure directory exists
+            os.makedirs(chroma_path, exist_ok=True)
+            
+            # Create PersistentClient explicitly
+            persistent_client = chromadb.PersistentClient(
+                path=chroma_path,
+                settings=client_settings
+            )
+            
+            # Create database with explicit client
             self.db = Chroma.from_documents(
                 documents=processed_docs,
                 collection_name='shopunow_kb',
                 embedding=embeddings,
-                persist_directory=chroma_path,
-                client_settings=client_settings
+                client=persistent_client
             )
-        except Exception as e:
-            raise ValueError(f"Failed to create vector database: {str(e)}. Ensure documents have valid content.")
+            print(f"Created persistent ChromaDB with {len(processed_docs)} documents at {chroma_path}")
+        except Exception as db_error:
+            raise ValueError(
+                f"Failed to create vector database: {str(db_error)}\n"
+                f"Ensure documents have valid content and the directory {chroma_path} is writable."
+            )
         
         # Create retriever
         self.retriever = self.db.as_retriever(
