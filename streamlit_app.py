@@ -1,6 +1,6 @@
 """
 ShopUNow AI Assistant - Streamlit Web Interface
-Cloud-Ready Version for Streamlit.io Deployment
+
 """
 
 import streamlit as st
@@ -307,12 +307,12 @@ with chat_container:
         for message in st.session_state.chat_history:
             if message['role'] == 'user':
                 st.markdown(
-                    f'<div class="chat-message user-message">👤 <b>You:</b><br>{message["content"]}</div>', 
+                    f'<div class="chat-message user-message"> <b>You:</b><br>{message["content"]}</div>', 
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    f'<div class="chat-message assistant-message">🤖 <b>Assistant:</b><br>{message["content"]}</div>', 
+                    f'<div class="chat-message assistant-message"> <b>Assistant:</b><br>{message["content"]}</div>', 
                     unsafe_allow_html=True
                 )
 
@@ -420,7 +420,7 @@ with col4:
 st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #666; font-size: 0.85rem;'>
-    <p>ShopUNow AI Assistant | Powered by GPT-4 | Available 24/7</p>
+    <p>ShopUNow AI Assistant | Powered by GPT-4o | Available 24/7</p>
     <p>For urgent matters, call: 1-800-SHOPUNOW | Email: support@shopunow.com</p>
 </div>
 """, unsafe_allow_html=True)
