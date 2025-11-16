@@ -275,7 +275,7 @@ with st.sidebar:
     
     st.markdown("---")
     st.caption("Powered by ShopUNow AI")
-    st.caption("© 2025 ShopUNow Inc.")
+    st.caption("© 2025 ShopUNow Inc. ")
 
 # ============================================================================
 # Main Chat Area
