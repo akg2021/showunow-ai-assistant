@@ -40,8 +40,6 @@ chroma_db/
 *.sqlite
 *.sqlite3
 
-# Knowledge base (will be regenerated)
-shopunow_kb.json
 
 # IDE
 .vscode/

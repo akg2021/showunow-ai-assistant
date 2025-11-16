@@ -143,7 +143,17 @@ class KnowledgeBaseManager:
     
     def __init__(self, llm):
         self.llm = llm
-        self.kb_file = Config.KB_FILE
+        # Use absolute path to ensure file is found in Streamlit Cloud
+        kb_file = Config.KB_FILE
+        if not os.path.isabs(kb_file):
+            # Get the directory where this script is located
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            self.kb_file = os.path.join(script_dir, kb_file)
+        else:
+            self.kb_file = kb_file
+        
+
+        self.kb_file_fallback = os.path.join(os.getcwd(), kb_file)
     
     def generate_knowledge_base(self):
         """Generate synthetic FAQ data for all departments."""
@@ -182,6 +192,7 @@ class KnowledgeBaseManager:
         ]
         
         all_knowledge_base = []
+        errors = []
         
         for dept in departments:
             prompt = f"""Generate 25 realistic question-answer pairs for {dept['name']} at ShopUNow retail company.
@@ -206,30 +217,85 @@ class KnowledgeBaseManager:
                 
                 qa_pairs = json.loads(content.strip())
                 
+                if not isinstance(qa_pairs, list) or len(qa_pairs) == 0:
+                    raise ValueError(f"Invalid or empty response for {dept['name']}")
+                
                 for qa in qa_pairs:
-                    all_knowledge_base.append({
-                        'text': f"Question: {qa['question']} Answer: {qa['answer']}",
-                        'metadata': {
-                            'department': dept['name'].lower().replace(' ', '_').replace('&', '_'),
-                            'user_type': dept['user_type'].lower()
-                        }
-                    })
+                    if 'question' in qa and 'answer' in qa:
+                        all_knowledge_base.append({
+                            'text': f"Question: {qa['question']} Answer: {qa['answer']}",
+                            'metadata': {
+                                'department': dept['name'].lower().replace(' ', '_').replace('&', '_'),
+                                'user_type': dept['user_type'].lower()
+                            }
+                        })
             except Exception as e:
-                print(f"Error generating KB for {dept['name']}: {e}")
+                error_msg = f"Error generating KB for {dept['name']}: {str(e)}"
+                errors.append(error_msg)
+                print(error_msg)
+        
+        # Validate we have content
+        if not all_knowledge_base:
+            error_summary = "\n".join(errors) if errors else "Unknown error"
+            raise ValueError(
+                f"Failed to generate knowledge base. No valid content was created.\n"
+                f"Errors encountered:\n{error_summary}\n"
+                f"Please ensure OPENAI_API_KEY is valid and the LLM can generate content."
+            )
         
         # Save
-        with open(self.kb_file, 'w') as f:
-            json.dump(all_knowledge_base, f, indent=2)
+        try:
+            with open(self.kb_file, 'w') as f:
+                json.dump(all_knowledge_base, f, indent=2)
+        except Exception as e:
+            print(f"Warning: Could not save knowledge base to file: {e}")
+            # Continue anyway - we still have the data in memory
         
         return all_knowledge_base
     
     def load_or_generate(self):
         """Load existing KB or generate new one."""
+        # Try to load existing file - check both script directory and current working directory
+        file_paths_to_try = [self.kb_file]
+        if hasattr(self, 'kb_file_fallback') and self.kb_file_fallback != self.kb_file:
+            file_paths_to_try.append(self.kb_file_fallback)
+        
+        for kb_file_path in file_paths_to_try:
+            try:
+                if os.path.exists(kb_file_path):
+                    with open(kb_file_path, 'r') as f:
+                        kb_data = json.load(f)
+                        # Validate loaded data
+                        if kb_data and isinstance(kb_data, list) and len(kb_data) > 0:
+                            print(f"Successfully loaded knowledge base from {kb_file_path} ({len(kb_data)} entries)")
+                            return kb_data
+                        else:
+                            print(f"Warning: Knowledge base file exists at {kb_file_path} but is empty or invalid. Trying other locations...")
+            except (FileNotFoundError, json.JSONDecodeError, IOError, PermissionError) as e:
+                print(f"Error loading knowledge base file from {kb_file_path}: {e}")
+                continue
+        
+        # If we get here, file wasn't found in any location
+        print(f"Knowledge base file not found in any of these locations: {file_paths_to_try}. Generating new one...")
+        
+        # Generate new knowledge base
         try:
-            with open(self.kb_file, 'r') as f:
-                return json.load(f)
-        except FileNotFoundError:
-            return self.generate_knowledge_base()
+            kb_data = self.generate_knowledge_base()
+            # Validate generated data
+            if not kb_data or not isinstance(kb_data, list) or len(kb_data) == 0:
+                raise ValueError("Generated knowledge base is empty")
+            return kb_data
+        except Exception as e:
+            paths_tried = [self.kb_file]
+            if hasattr(self, 'kb_file_fallback'):
+                paths_tried.append(self.kb_file_fallback)
+            raise ValueError(
+                f"Failed to load or generate knowledge base: {str(e)}\n"
+                f"File paths attempted: {paths_tried}\n"
+                f"Current working directory: {os.getcwd()}\n"
+                f"Script directory: {os.path.dirname(os.path.abspath(__file__))}\n"
+                f"Please ensure shopunow_kb.json exists in the project root or that OPENAI_API_KEY is valid for generation."
+            )
 
 
 # ============================================================================
@@ -757,27 +823,58 @@ class ShopUNowAgent:
             )
         
         # Initialize LLM
-        self.llm = ChatOpenAI(
-            model=Config.LLM_MODEL,
-            temperature=Config.LLM_TEMPERATURE,
-            api_key=api_key
-        )
+        try:
+            self.llm = ChatOpenAI(
+                model=Config.LLM_MODEL,
+                temperature=Config.LLM_TEMPERATURE,
+                api_key=api_key
+            )
+        except Exception as e:
+            raise ValueError(f"Failed to initialize LLM: {str(e)}. Please check your OPENAI_API_KEY.")
         
         # Load knowledge base
-        kb_manager = KnowledgeBaseManager(self.llm)
-        knowledge_base = kb_manager.load_or_generate()
+        try:
+            kb_manager = KnowledgeBaseManager(self.llm)
+            knowledge_base = kb_manager.load_or_generate()
+            
+            # Validate knowledge base before proceeding
+            if not knowledge_base:
+                raise ValueError("Knowledge base is empty after loading/generation.")
+            if not isinstance(knowledge_base, list):
+                raise ValueError(f"Knowledge base is not a list. Got type: {type(knowledge_base)}")
+            if len(knowledge_base) == 0:
+                raise ValueError("Knowledge base list is empty.")
+            
+            print(f"Successfully loaded knowledge base with {len(knowledge_base)} entries.")
+        except ValueError as e:
+            # Re-raise ValueError with more context
+            raise ValueError(f"Knowledge base initialization failed: {str(e)}")
+        except Exception as e:
+            raise ValueError(
+                f"Unexpected error loading knowledge base: {str(e)}\n"
+                f"Please ensure shopunow_kb.json exists in the project root or that OPENAI_API_KEY is valid for generation."
+            )
         
         # Create vector database
-        db_manager = VectorDBManager()
-        db, retriever = db_manager.create_database(knowledge_base)
+        try:
+            db_manager = VectorDBManager()
+            db, retriever = db_manager.create_database(knowledge_base)
+        except ValueError as e:
+            # Re-raise with context
+            raise ValueError(f"Vector database creation failed: {str(e)}")
+        except Exception as e:
+            raise ValueError(f"Unexpected error creating vector database: {str(e)}")
         
         # Build agent graph
-        nodes = AgentNodes(self.llm, retriever, db)
-        graph = self._build_graph(nodes)
-        
-        # Compile with memory
-        memory = MemorySaver()
-        self.agent = graph.compile(checkpointer=memory)
+        try:
+            nodes = AgentNodes(self.llm, retriever, db)
+            graph = self._build_graph(nodes)
+            
+            # Compile with memory
+            memory = MemorySaver()
+            self.agent = graph.compile(checkpointer=memory)
+        except Exception as e:
+            raise ValueError(f"Failed to build agent graph: {str(e)}")
         
         self._initialized = True
     

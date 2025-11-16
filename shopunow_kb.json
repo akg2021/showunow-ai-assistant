@@ -1,0 +1,1052 @@
+[
+  {
+    "text": "Question: What types of employee benefits does ShopUNow offer? Answer: ShopUNow offers health insurance, dental and vision plans, 401(k) matching, employee discounts, and wellness programs.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I enroll in the health insurance plan? Answer: You can enroll in the health insurance plan through the employee portal during the open enrollment period or within 30 days of your hire date.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the process for requesting vacation leave? Answer: To request vacation leave, submit a leave request form through the HR portal at least two weeks in advance for approval by your manager.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How many sick days am I entitled to per year? Answer: Employees are entitled to 10 sick days per year, which can be used for personal illness or to care for a sick family member.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: When is the performance review period at ShopUNow? Answer: Performance reviews are conducted annually in March, with mid-year check-ins in September.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How is overtime pay calculated? Answer: Overtime pay is calculated at 1.5 times your regular hourly rate for any hours worked over 40 in a workweek.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if I notice a discrepancy in my paycheck? Answer: If you notice a discrepancy in your paycheck, contact the payroll department immediately to resolve the issue.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Are part-time employees eligible for benefits? Answer: Part-time employees are eligible for certain benefits, such as employee discounts and access to the wellness program, but not for health insurance or 401(k) matching.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I update my direct deposit information? Answer: You can update your direct deposit information through the employee self-service portal under the payroll section.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the policy on maternity leave? Answer: ShopUNow provides 12 weeks of maternity leave, with 6 weeks paid at 60% of your salary and the option to use accrued vacation or sick leave for additional paid time.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I access my pay stubs online? Answer: Pay stubs can be accessed through the employee self-service portal under the payroll section.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the procedure for reporting a workplace injury? Answer: Report any workplace injury to your supervisor immediately and complete an incident report form, which will be submitted to HR for further action.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Can I carry over unused vacation days to the next year? Answer: Employees can carry over up to 5 unused vacation days to the next calendar year.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What resources are available for professional development? Answer: ShopUNow offers online training courses, workshops, and tuition reimbursement for approved courses related to your job role.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I apply for a leave of absence? Answer: To apply for a leave of absence, submit a formal request through the HR portal, including the reason and duration of the leave, for approval.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the dress code policy at ShopUNow? Answer: The dress code at ShopUNow is business casual, with specific guidelines provided in the employee handbook.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How often are employees paid? Answer: Employees are paid bi-weekly, every other Friday.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the policy on bereavement leave? Answer: Employees are entitled to up to 3 days of paid bereavement leave for the death of an immediate family member.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I provide feedback on my performance review? Answer: You can provide feedback on your performance review by completing the feedback section in the performance review form and discussing it with your manager.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the process for requesting a salary advance? Answer: To request a salary advance, submit a written request to HR, explaining the reason for the advance and the amount needed.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Are there any employee recognition programs? Answer: Yes, ShopUNow has an employee recognition program that includes monthly awards for outstanding performance and peer recognition initiatives.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I report harassment or discrimination in the workplace? Answer: Report any harassment or discrimination to your HR representative or use the anonymous reporting hotline available on the employee portal.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the policy on remote work? Answer: Remote work is allowed for eligible positions with manager approval, and employees must adhere to the remote work guidelines outlined in the employee handbook.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I change my tax withholding status? Answer: You can change your tax withholding status by submitting a new W-4 form through the employee self-service portal.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What support is available for mental health? Answer: ShopUNow offers an Employee Assistance Program (EAP) that provides confidential counseling services and mental health resources.",
+    "metadata": {
+      "department": "hr_department",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I reset my ShopUNow email password? Answer: To reset your ShopUNow email password, go to the login page and click on 'Forgot Password'. Follow the instructions sent to your registered email.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if my computer is running slow? Answer: Try restarting your computer. If the issue persists, check for any software updates or contact IT Support for further assistance.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I request new hardware for my workstation? Answer: Submit a hardware request form through the internal IT portal. Your request will be reviewed and processed by the IT department.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: I can't access the company intranet. What should I do? Answer: Ensure you are connected to the company network. If the issue continues, contact IT Support for help.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I install the latest version of the ShopUNow inventory software? Answer: Visit the software section on the IT portal and download the latest version. Follow the installation instructions provided.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the process for reporting a phishing email? Answer: Forward the suspicious email to phishing@shopunow.com and delete it from your inbox. Do not click on any links or attachments.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I connect to the VPN from home? Answer: Use the VPN client installed on your computer. Enter your credentials and connect to the ShopUNow network.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: My printer is not working. How can I fix it? Answer: Check if the printer is powered on and connected to your computer. If the problem persists, contact IT Support for assistance.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I update my profile information in the employee directory? Answer: Log in to the employee portal and navigate to 'My Profile'. Update your information and save the changes.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if I forget my network login password? Answer: Contact IT Support to reset your network login password. You may need to verify your identity.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I request access to a new software application? Answer: Submit a software access request through the IT portal. Your manager will need to approve the request before it is processed.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Why am I unable to send emails from my ShopUNow account? Answer: Check if your mailbox is full or if there are any connectivity issues. If the problem continues, contact IT Support.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I set up my email on my mobile device? Answer: Download the email app and enter your ShopUNow email credentials. Follow the setup instructions provided by the app.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What steps should I take if my computer has a virus? Answer: Disconnect from the network and run a full antivirus scan. Contact IT Support for further assistance.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I access my work files from a remote location? Answer: Use the ShopUNow VPN to securely connect to the company network and access your files remotely.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if I experience a system crash? Answer: Restart your computer and try to replicate the issue. If it happens again, contact IT Support with details of the crash.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I change my default printer settings? Answer: Go to 'Devices and Printers' in the Control Panel, right-click on the printer you want to set as default, and select 'Set as default printer'.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I check the status of my IT support ticket? Answer: Log in to the IT support portal and navigate to 'My Tickets' to view the status of your support requests.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the procedure for requesting a new monitor? Answer: Submit a hardware request form through the IT portal specifying the need for a new monitor. IT will review and process your request.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I report a broken keyboard? Answer: Submit a hardware issue report through the IT portal, and IT Support will arrange for a replacement.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I improve my computer's performance? Answer: Ensure your software is up to date, clear temporary files, and consider upgrading your hardware if necessary. Contact IT Support for more advice.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if I can't log into my computer? Answer: Ensure your credentials are correct and check for any keyboard issues. If you still can't log in, contact IT Support for assistance.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I request a software update? Answer: Submit a software update request through the IT portal. IT Support will review and apply the update if approved.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the process for setting up a new employee's IT equipment? Answer: Submit a new employee setup request through the IT portal, including details of the required equipment and software.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I back up my work files? Answer: Use the company-provided backup solution to regularly back up your files to the cloud or a designated network drive.",
+    "metadata": {
+      "department": "it_support",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I request a new access card? Answer: To request a new access card, please fill out the Access Card Request Form on the company intranet and submit it to the Facilities & Admin department.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if my access card is lost or stolen? Answer: If your access card is lost or stolen, report it immediately to Facilities & Admin so it can be deactivated. You can then request a replacement card.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I order office supplies? Answer: Office supplies can be ordered through the ShopUNow internal portal under the 'Office Supplies' section. Select the items you need and submit your order for approval.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Who do I contact for maintenance issues in the office? Answer: For any maintenance issues, please contact the Facilities & Admin team via the maintenance request form on the company intranet.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the process for booking a meeting room? Answer: Meeting rooms can be booked through the company calendar system. Select the room, date, and time, and confirm your booking.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I report a broken office chair? Answer: To report a broken office chair, submit a maintenance request through the company intranet, detailing the issue and location.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Can I request a standing desk? Answer: Yes, you can request a standing desk by submitting a request through the Facilities & Admin section on the intranet.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What are the office hours for the Facilities & Admin department? Answer: The Facilities & Admin department is open from 8:00 AM to 5:00 PM, Monday through Friday.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I get a parking permit for the office? Answer: Parking permits can be requested by filling out the Parking Permit Application form available on the company intranet.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Where can I find the emergency evacuation plan? Answer: The emergency evacuation plan is posted on the company intranet under the 'Safety & Security' section and is also displayed on notice boards throughout the office.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I request a new phone line for my desk? Answer: To request a new phone line, please contact the IT department through the internal helpdesk system.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if the office printer is not working? Answer: If the office printer is not working, report the issue to the Facilities & Admin team via the maintenance request form.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I access the office after hours? Answer: To access the office after hours, you need to have an after-hours access card. Contact Facilities & Admin to request one.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Where can I find the first aid kit in the office? Answer: First aid kits are located in the break room and near the main reception area. Please familiarize yourself with their locations.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I request a change in my workspace layout? Answer: To request a change in your workspace layout, submit a request through the Facilities & Admin section on the intranet, detailing your needs.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the procedure for disposing of electronic waste? Answer: Electronic waste should be disposed of through the designated e-waste bins located in the IT department. Contact Facilities & Admin for more information.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I report a security concern in the office? Answer: Security concerns should be reported immediately to the Facilities & Admin team or the security desk at the main entrance.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Can I bring personal furniture into the office? Answer: Bringing personal furniture into the office requires approval from the Facilities & Admin department. Submit a request detailing the items you wish to bring.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I request additional storage space? Answer: To request additional storage space, contact the Facilities & Admin team through the intranet request form.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What should I do if I find a leak in the office? Answer: If you find a leak, report it immediately to the Facilities & Admin team using the maintenance request form on the intranet.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How can I get a replacement for a damaged office key? Answer: To get a replacement for a damaged office key, contact the Facilities & Admin department and submit a key replacement request.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What is the policy for using personal heaters at my desk? Answer: Personal heaters are not allowed due to safety regulations. If you have temperature concerns, contact Facilities & Admin for assistance.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I request a new ergonomic chair? Answer: To request a new ergonomic chair, submit a request through the Facilities & Admin section on the intranet, specifying your ergonomic needs.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: Where can I find the office recycling bins? Answer: Recycling bins are located in the break room and near the main exits. Please ensure to separate recyclables from general waste.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: How do I update my emergency contact information? Answer: To update your emergency contact information, log into the employee portal and navigate to the 'Personal Information' section.",
+    "metadata": {
+      "department": "facilities___admin",
+      "user_type": "internal employee"
+    }
+  },
+  {
+    "text": "Question: What are the specifications of the latest smartphone available at ShopUNow? Answer: The latest smartphone features a 6.7-inch OLED display, 128GB storage, 12GB RAM, and a 5000mAh battery.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Is the 55-inch 4K Smart TV available in stock? Answer: Yes, the 55-inch 4K Smart TV is currently in stock and available for purchase.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the price of the wireless noise-cancelling headphones? Answer: The wireless noise-cancelling headphones are priced at $199.99.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Do you offer any warranty on kitchen appliances? Answer: Yes, we offer a one-year warranty on all kitchen appliances.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I find eco-friendly cleaning products at ShopUNow? Answer: Yes, we have a range of eco-friendly cleaning products available.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What are the dimensions of the wooden dining table? Answer: The wooden dining table measures 72 inches in length, 36 inches in width, and 30 inches in height.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Are there any discounts on home office furniture? Answer: Yes, we currently have a 15% discount on select home office furniture.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Is the gaming laptop available for online purchase? Answer: Yes, the gaming laptop is available for online purchase with free shipping.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What colors are available for the leather sofa? Answer: The leather sofa is available in black, brown, and gray.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Do you have any vegan skincare products? Answer: Yes, we offer a variety of vegan skincare products.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the battery life of the cordless vacuum cleaner? Answer: The cordless vacuum cleaner has a battery life of up to 60 minutes.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Are there any bundle deals for the smart home devices? Answer: Yes, we offer bundle deals that include a smart speaker, smart bulbs, and a smart plug.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the return policy for electronics? Answer: Electronics can be returned within 30 days of purchase with a receipt.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Is the air purifier suitable for large rooms? Answer: Yes, the air purifier is designed for rooms up to 500 square feet.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the material of the outdoor patio set? Answer: The outdoor patio set is made of weather-resistant wicker and aluminum.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Do you offer installation services for washing machines? Answer: Yes, we offer installation services for washing machines at an additional cost.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the capacity of the stainless steel refrigerator? Answer: The stainless steel refrigerator has a capacity of 25 cubic feet.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Are there any organic food products available? Answer: Yes, we have a selection of organic food products in our grocery section.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the price range for the electric scooters? Answer: The electric scooters range from $299.99 to $599.99.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Is the fitness tracker waterproof? Answer: Yes, the fitness tracker is waterproof up to 50 meters.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Do you have any pet-friendly cleaning supplies? Answer: Yes, we offer a variety of pet-friendly cleaning supplies.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What are the features of the smart thermostat? Answer: The smart thermostat features remote control via app, energy-saving modes, and voice assistant compatibility.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Is the electric grill suitable for indoor use? Answer: Yes, the electric grill is designed for safe indoor use.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the thread count of the cotton bed sheets? Answer: The cotton bed sheets have a thread count of 400.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Are there any financing options available for large appliances? Answer: Yes, we offer financing options for large appliances with approved credit.",
+    "metadata": {
+      "department": "products",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How can I view my invoice for a recent purchase? Answer: You can view your invoice by logging into your ShopUNow account and navigating to the 'Order History' section.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if I notice an overcharge on my bill? Answer: If you notice an overcharge, please contact our customer service team with your order details for assistance.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How long does it take to process a refund? Answer: Refunds are typically processed within 5-7 business days after we receive your return.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I use multiple payment methods for a single purchase? Answer: Currently, we only accept one payment method per transaction.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What payment methods are accepted at ShopUNow? Answer: We accept credit cards, debit cards, PayPal, and ShopUNow gift cards.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How do I request a refund for a returned item? Answer: To request a refund, please initiate a return through your account and follow the instructions provided.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Why was my payment declined? Answer: Payments can be declined for various reasons, such as incorrect card details or insufficient funds. Please check with your bank for more information.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How can I update my billing information? Answer: You can update your billing information by logging into your account and going to the 'Payment Methods' section.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if I didn't receive an invoice with my order? Answer: If you didn't receive an invoice, please contact our support team, and they will send you a copy.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Is there a fee for processing refunds? Answer: No, ShopUNow does not charge any fees for processing refunds.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I pay for my order using a gift card and a credit card? Answer: Yes, you can use a gift card along with a credit card to pay for your order.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How do I know if my refund has been processed? Answer: You will receive an email notification once your refund has been processed. You can also check the status in your account under 'Order History'.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What happens if I am overcharged for shipping? Answer: If you are overcharged for shipping, please contact our customer service for a refund of the excess amount.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I change my payment method after placing an order? Answer: Unfortunately, once an order is placed, the payment method cannot be changed.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How do I apply a discount code to my purchase? Answer: You can apply a discount code at checkout in the 'Promo Code' field before completing your purchase.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if I receive a refund for the wrong amount? Answer: Please contact our customer service team with your order details to resolve any discrepancies in your refund amount.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I receive a refund to a different payment method? Answer: Refunds are typically issued to the original payment method used for the purchase.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How can I get a copy of my past invoices? Answer: You can download copies of your past invoices from the 'Order History' section in your account.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if my payment is still pending? Answer: If your payment is pending, please check with your bank or payment provider for more information.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Are there any additional charges for international payments? Answer: International payments may incur additional charges depending on your bank's policies.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How do I cancel a pending payment? Answer: To cancel a pending payment, please contact our customer service team as soon as possible.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the process for disputing a charge? Answer: To dispute a charge, please contact our customer service with your order details and the reason for the dispute.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I set up automatic payments for my orders? Answer: Currently, we do not offer automatic payment setups for orders.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How do I know if my payment was successful? Answer: You will receive a confirmation email once your payment is successful. You can also check your order status in your account.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if I accidentally paid twice for the same order? Answer: If you paid twice, please contact our customer service team for assistance in processing a refund for the duplicate payment.",
+    "metadata": {
+      "department": "billing___payments",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How can I track my order from ShopUNow? Answer: You can track your order by logging into your ShopUNow account and visiting the 'Order History' section. You will find tracking information for each order there.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if my order from ShopUNow is delayed? Answer: If your order is delayed, please check the tracking information for updates. If there are no updates, contact our customer service for assistance.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How do I initiate a return for a damaged item from ShopUNow? Answer: To return a damaged item, log into your account, go to 'Order History', select the order, and click on 'Return Item'. Follow the instructions to schedule a pickup.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the typical delivery time for orders placed on ShopUNow? Answer: The typical delivery time is 3-5 business days, but it may vary based on your location and the shipping method selected.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I change the delivery address after placing an order on ShopUNow? Answer: Once an order is placed, the delivery address cannot be changed. Please contact customer service for further assistance.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if I receive the wrong item from ShopUNow? Answer: If you receive the wrong item, please contact our customer service immediately to arrange for a return and replacement.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Does ShopUNow offer expedited shipping options? Answer: Yes, ShopUNow offers expedited shipping options at checkout for an additional fee.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How can I cancel my order on ShopUNow? Answer: You can cancel your order within 30 minutes of placing it by visiting 'Order History' in your account and selecting 'Cancel Order'.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if my ShopUNow package is marked as delivered but I haven't received it? Answer: If your package is marked as delivered but you haven't received it, please check with neighbors or contact our customer service for assistance.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How does ShopUNow handle returns for international orders? Answer: For international returns, please contact our customer service to receive specific instructions and return labels.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is ShopUNow's policy on returning sale items? Answer: Sale items can be returned within 30 days of delivery, provided they are in original condition and packaging.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How long does it take to process a return at ShopUNow? Answer: Returns are typically processed within 5-7 business days after the item is received at our warehouse.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Will I be notified when my ShopUNow order is shipped? Answer: Yes, you will receive an email notification with tracking information once your order is shipped.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I schedule a specific delivery time for my ShopUNow order? Answer: Currently, we do not offer specific delivery time scheduling. Deliveries are made during standard business hours.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if my ShopUNow order arrives damaged? Answer: If your order arrives damaged, please contact our customer service immediately to report the issue and arrange for a return or replacement.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Does ShopUNow offer free shipping on returns? Answer: Yes, ShopUNow offers free shipping on returns for items that are damaged or incorrect.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How can I find out the shipping cost for my ShopUNow order? Answer: Shipping costs are calculated at checkout based on your location and the shipping method selected.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What carriers does ShopUNow use for shipping? Answer: ShopUNow partners with major carriers like UPS, FedEx, and USPS for shipping.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I return an item to a ShopUNow physical store? Answer: Yes, items purchased online can be returned to any ShopUNow physical store with the original receipt.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How do I know if my ShopUNow order qualifies for free shipping? Answer: Orders over $50 qualify for free standard shipping. This will be automatically applied at checkout.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What should I do if I miss the delivery of my ShopUNow package? Answer: If you miss a delivery, the carrier will leave a notice with instructions for rescheduling or pickup.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Can I track my return shipment to ShopUNow? Answer: Yes, you can track your return shipment using the tracking number provided on the return label.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: What is the return window for items purchased from ShopUNow? Answer: Items can be returned within 30 days of delivery for a full refund, provided they are in original condition.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: Does ShopUNow offer gift wrapping for shipped orders? Answer: Yes, gift wrapping is available for an additional fee and can be selected at checkout.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  },
+  {
+    "text": "Question: How can I contact ShopUNow customer service for shipping inquiries? Answer: You can contact our customer service via phone, email, or live chat on our website for any shipping inquiries.",
+    "metadata": {
+      "department": "shipping___delivery",
+      "user_type": "external customer"
+    }
+  }
+]
